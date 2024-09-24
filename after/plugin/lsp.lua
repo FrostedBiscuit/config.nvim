@@ -4,7 +4,9 @@ lsp.ensure_installed({
 	'tsserver',
 	'eslint',
 	'rust_analyzer',
-    'texlab'
+	'texlab',
+	'denols',
+	'emmet_language_server'
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -26,6 +28,11 @@ end)
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 require('lspconfig').gdscript.setup({})
 require('lspconfig').texlab.setup({})
+require('lspconfig').denols.setup({
+	on_attach = lsp.on_attach,
+	root_dir = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")
+})
+require('lspconfig').emmet_language_server.setup({})
 
 require("mason").setup()
 
