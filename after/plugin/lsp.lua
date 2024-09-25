@@ -1,7 +1,7 @@
 local lsp = require('lsp-zero').preset({})
 
 lsp.ensure_installed({
-	'tsserver',
+	'ts_ls',
 	'eslint',
 	'rust_analyzer',
 	'texlab',
@@ -12,9 +12,9 @@ lsp.ensure_installed({
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	lsp.default_keymaps({buffer = bufnr})
+	lsp.default_keymaps({ buffer = bufnr })
 
-	local opts = {buffer = bufnr, remap = false}
+	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
@@ -25,12 +25,11 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- (Optional) Configure lua language server for neovim
-require('lspconfig').emmet_language_server.setup({})
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 lspconfig.gdscript.setup({})
 lspconfig.texlab.setup({})
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
 	root_dir = lspconfig.util.root_pattern("package.json"),
 	single_file_support = false
 })
@@ -59,6 +58,7 @@ lspconfig.denols.setup({
 		end
 	end,
 })
+lspconfig.emmet_language_server.setup({})
 
 require("mason").setup()
 
