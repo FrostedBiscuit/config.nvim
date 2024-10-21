@@ -44,15 +44,16 @@ lspconfig.denols.setup({
 					["https://deno.land"] = true,
 					["https://cdn.nest.land"] = true,
 					["https://crux.land"] = true,
+					["https://esm.sh"] = true,
 				},
 			},
 		},
 	},
 	on_attach = function()
-		local active_clients = vim.lsp.get_active_clients()
+		local active_clients = vim.lsp.get_clients()
 		for _, client in pairs(active_clients) do
-			-- stop tsserver if denols is already active
-			if client.name == "tsserver" then
+			-- stop ts_ls if denols is already active
+			if client.name == "ts_ls" then
 				client.stop()
 			end
 		end
