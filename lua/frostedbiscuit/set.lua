@@ -8,5 +8,5 @@ vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
--- Clipboard
-vim.o.clipboard = 'unnamedplus'
+-- Scroll stuff
+vim.o.scrolloff = 8
